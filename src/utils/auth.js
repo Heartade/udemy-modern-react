@@ -1,5 +1,5 @@
 import auth0 from 'auth0-js'
-
+import history from './history';
 export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'heartade.us.auth0.com',
@@ -24,7 +24,9 @@ export default class Auth {
         // to get the session expiration time.
         // we then stringify it into json in order to store the result in localStorage.
         let expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime());
-        localStorage.setItem('expiresAt', expiresAt)
+        localStorage.setItem('expiresAt', expiresAt);
+
+        setTimeout(()=>{history.replace('/authcheck')}, 200);
       } else { // on failure
         console.log(err);
       }
@@ -35,5 +37,10 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expiresAt');
+  }
+
+  isAuthenticated = () => {
+    let expiresAt = JSON.parse(localStorage.getItem("expiresAt"));
+    return new Date().getTime() < expiresAt;
   }
 }
