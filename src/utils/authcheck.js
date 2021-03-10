@@ -1,30 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import history from "./history";
+import * as ACTIONS from "../store/actions/actions";
 
 class AuthCheck extends Component {
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated()) {
+      this.props.login_success();
+      history.replace("/"); // return to home
+    } else {
+      this.props.login_failure();
+      history.replace("/"); // return to home
+    }
+  }
   render() {
-    return (
-      <div>
-
-      </div>
-    )
+    return <div></div>;
   }
 }
 
 function mapStateToProps(state) {
   return {
     stateprop1: state.reducer1.stateprop1,
-    userText: state.userReducer.user_text
-  }
+    userText: state.userReducer.user_text,
+  };
 }
 
+// Provide dispatch methods as props
 function mapDispatchToProps(dispatch) {
   return {
-    action1: () => dispatch(ACTIONS.SUCCESS),
-    action2: () => dispatch(ACTIONS.FAILURE),
-    actionCreator1: () => dispatch(ACTIONS.success()),
-    actionCreator2: () => dispatch(ACTIONS.failure()),
-    actionCreator3: (payload) => dispatch(ACTIONS.user_input(payload))
-  }
+    login_success: (() => dispatch(ACTIONS.login_success())),
+    login_failure: (() => dispatch(ACTIONS.login_failure())),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthCheck);

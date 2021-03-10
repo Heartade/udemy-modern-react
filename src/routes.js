@@ -8,6 +8,7 @@ import Container1 from "./container/container1";
 import Callback from "./functional/callback";
 import Header from "./container/header";
 import history from "./utils/history";
+import AuthCheck from "./utils/authcheck";
 
 import { Router, Route, Switch } from "react-router-dom";
 import Auth from "./utils/auth";
@@ -17,7 +18,7 @@ const auth = new Auth();
 
 const handleAuthentication = (props) => {
   if (props.location.hash) {
-    auth.handleAuth();
+    auth.handleAuAth();
   }
 };
 
@@ -36,6 +37,10 @@ class Routes extends Component {
                   // Auth object in login function is passed as a prop
                   () => <Container1 auth={auth} />
                 }
+              />
+              <Route
+                path="/authcheck"
+                render={() => <AuthCheck auth={auth} />}
               />
               <Route
                 path="/callback"
