@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import history from "./history";
 import * as ACTIONS from "../store/actions/actions";
 
+import { connect } from 'react-redux';
+
 class AuthCheck extends Component {
   componentDidMount() {
     if (this.props.auth.isAuthenticated()) {

@@ -24,6 +24,9 @@ class Header extends Component {
                 <Link to = '/' style={{padding: "5px"}}>
                     Home
                 </Link>
+                <Link to = '/privateroute' style={{padding: "5px"}}>
+                    Authorized Access
+                </Link>
                 {this.state.pages.map(page=>(
                     <Link key = {page.id} to = {'/component/'+page.name} style={{padding: "5px"}}>
                         {page.name}

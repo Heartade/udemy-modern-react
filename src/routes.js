@@ -10,18 +10,26 @@ import Header from "./container/header";
 import history from "./utils/history";
 import AuthCheck from "./utils/authcheck";
 
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import Auth from "./utils/auth";
+import UnauthRedirect from "./functional/unauthredirect";
+import ProtectedRoute from "./functional/protectedroute";
 
 // this auth object will be passed into container1 as a prop
 const auth = new Auth();
 
 const handleAuthentication = (props) => {
   if (props.location.hash) {
-    auth.handleAuAth();
+    auth.handleAuth();
   }
 };
 
+const PrivateRoute = ({component: Component, auth}) => (
+  <Route render = {props=>auth.isAuthenticated() === true
+  ? <Component auth={auth} {...props}/>
+  : <Redirect to={{pathname:'/redirect'}}/>
+  }/>
+)
 class Routes extends Component {
   render() {
     return (
@@ -42,6 +50,7 @@ class Routes extends Component {
                 path="/authcheck"
                 render={() => <AuthCheck auth={auth} />}
               />
+              <Route path='/redirect' component={UnauthRedirect}/>
               <Route
                 path="/callback"
                 render={(props) => {
@@ -54,6 +63,7 @@ class Routes extends Component {
                 path="/component/:name"
                 render={(prop) => <Component1 {...prop} />}
               />
+              <PrivateRoute path="/privateroute" auth={auth} component={ProtectedRoute}/>
             </Switch>
           </div>
         </Router>
