@@ -36,7 +36,7 @@ class Routes extends Component {
       <div>
         <Router history={history}>
           <div>
-            <Header />
+            <Header auth={auth}/>
             <Switch>
               <Route
                 exact
