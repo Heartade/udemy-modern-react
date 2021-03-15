@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js'
+import { access } from 'fs';
 import history from './history';
 export default class Auth {
   auth0 = new auth0.WebAuth({
@@ -13,10 +14,13 @@ export default class Auth {
     this.auth0.authorize();
   }
 
+  userProfile = {}
+
   handleAuth = () => {
     this.auth0.parseHash((err, authResult) => {
       // parseHash takes a callback function as parameter.
       if(authResult) { // on success authResult is a truthy value
+        console.log(authResult);
         localStorage.setItem('access_token', authResult.accessToken)
         localStorage.setItem('id_token', authResult.idToken)
 
@@ -31,6 +35,26 @@ export default class Auth {
         console.log(err);
       }
     })
+  }
+
+  getAccessToken = ()=>{
+    if(localStorage.getItem('access_token')) {
+      const accessToken = localStorage.getItem('access_token');
+      return accessToken;
+    } else {
+      return null;
+    }
+  }
+
+  getProfile = ()=>{
+    let accessToken = this.getAccessToken();
+    if(accessToken) {
+      this.auth0.client.userInfo(accessToken, (err, profile)=>{
+        if(profile) {
+          this.userProfile = {profile};
+        }
+      })
+    }
   }
 
   logout = () => {

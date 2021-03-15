@@ -45,7 +45,7 @@ class Header extends Component {
 
 function mapStateToProps(state) {
     return {
-        is_authenticated: state.auth_reducer.is_authenticated
+        is_authenticated: state.authReducer.is_authenticated
     }
 }
 
