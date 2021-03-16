@@ -38,3 +38,14 @@ export const login_failure = ()=>{
     type: ACTION_TYPES.LOGIN_FAILURE
   }
 }
+export const add_profile = (profile)=>{
+  return {
+    type: ACTION_TYPES.ADD_PROFILE,
+    payload: profile
+  }
+}
+export const remove_profile = ()=>{
+  return {
+    type: ACTION_TYPES.REMOVE_PROFILE
+  }
+}
