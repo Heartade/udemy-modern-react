@@ -30,7 +30,8 @@ export default class Auth {
         let expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime());
         localStorage.setItem('expiresAt', expiresAt);
 
-        setTimeout(()=>{history.replace('/authcheck')}, 200);
+        this.getProfile();
+        setTimeout(()=>{history.replace('/authcheck')}, 2000);
       } else { // on failure
         console.log(err);
       }
