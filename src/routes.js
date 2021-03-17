@@ -5,6 +5,7 @@ import Component2 from "./functional/component2";
 import Component3 from "./functional/component3";
 
 import Container1 from "./container/container1";
+import Profile from "./container/profile";
 import Callback from "./functional/callback";
 import Header from "./container/header";
 import history from "./utils/history";
@@ -63,6 +64,7 @@ class Routes extends Component {
                 path="/component/:name"
                 render={(prop) => <Component1 {...prop} />}
               />
+              <PrivateRoute path='/profile' auth={auth} component={Profile}/>
               <PrivateRoute path="/privateroute" auth={auth} component={ProtectedRoute}/>
             </Switch>
           </div>
