@@ -11,7 +11,7 @@ class Container1 extends Component {
   render() {
     return (
       <div>
-        <button onClick={() => console.log(this.props.userProfile)}> Get State </button>
+        <button onClick={() => console.log(this.props.isAuthenticated)}> Get State </button>
         <button onClick={() => this.props.action1()}> Dispatch Action 1 </button>
         <button onClick={() => this.props.action2()}> Dispatch Action 2 </button>
         <button onClick={() => this.props.actionCreator1()}> Dispatch Action Creator 1 </button>
@@ -30,7 +30,8 @@ function mapStateToProps(state) {
   return {
     stateprop1: state.reducer1.stateprop1,
     userText: state.userReducer.user_text,
-    userProfile: state.authReducer.profile
+    userProfile: state.authReducer.profile,
+    isAuthenticated: state.authReducer.is_authenticated
   }
 }
 

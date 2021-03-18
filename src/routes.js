@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 
+import { connect } from 'react-redux';
+import * as ACTIONS from "./store/actions/actions";
+
 import Component1 from "./functional/component1";
-import Component2 from "./functional/component2";
-import Component3 from "./functional/component3";
 
 import Container1 from "./container/container1";
 import Profile from "./container/profile";
@@ -32,6 +33,19 @@ const PrivateRoute = ({component: Component, auth}) => (
   }/>
 )
 class Routes extends Component {
+  componentDidMount() { // Run auth check before render()
+    if (auth.isAuthenticated()) {
+      this.props.login_success();
+      auth.getProfile();
+      setTimeout(()=>{
+        this.props.add_profile(auth.userProfile);
+      }, 2000);
+    } else {
+      this.props.login_failure();
+      this.props.remove_profile();
+    }
+  }
+
   render() {
     return (
       <div>
@@ -74,4 +88,15 @@ class Routes extends Component {
   }
 }
 
-export default Routes;
+function mapStateToProps() {return {}}
+// Provide dispatch methods as props
+function mapDispatchToProps(dispatch) {
+  return {
+    login_success: (() => dispatch(ACTIONS.login_success())),
+    login_failure: (() => dispatch(ACTIONS.login_failure())),
+    add_profile: ((profile)=>dispatch(ACTIONS.add_profile(profile))),
+    remove_profile: (()=>dispatch(ACTIONS.remove_profile()))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Routes);
