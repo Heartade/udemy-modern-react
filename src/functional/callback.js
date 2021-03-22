@@ -1,12 +1,9 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom';
 
-const Callback = props => {
-  return (
+const Callback = props => (
     <div>
       Callback
     </div>
-  );
-}
+);
 
-export default withRouter(Callback);
+export default Callback;

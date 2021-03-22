@@ -1,14 +1,10 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom';
 
-const Component1 = props => {
-  return (
+const Component1 = props => (
     <div>
-      <h1>{props.match.params.name}</h1>
-      <br/>
-      Content
+    Component 1
+    {console.log(props)}
     </div>
-  );
-}
+);
 
-export default withRouter(Component1);
+export default Component1;

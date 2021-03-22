@@ -1,12 +1,9 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom';
 
-const UnauthRedirect = props => {
-  return (
+const UnauthRedirect = props => (
     <div>
       UnauthRedirect
     </div>
-  );
-}
+);
 
 export default UnauthRedirect;
