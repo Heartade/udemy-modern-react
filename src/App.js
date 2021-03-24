@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Routes from './routes';
 
 
 //main app 
-class App extends Component {
-
-  render() {
+const App = () => {
     return(
       <div>
       React
       <Routes />
       </div>
-    )}
+    )
 }
 
 
