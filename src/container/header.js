@@ -25,6 +25,9 @@ class Header extends Component {
                 <Link to="/" style={{ padding: "5px" }}>
                     Home
                 </Link>
+                <Link to="/hookscontainer" style={{ padding: "5px" }}>
+                    Hooks
+                </Link>
                 {this.props.is_authenticated ? (
                     <Link to="/profile" style={{ padding: "5px" }}>
                         Profile
