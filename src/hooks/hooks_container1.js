@@ -1,8 +1,11 @@
-import React, {useState, useEffect, useReducer} from 'react'
+import React, {useState, useEffect, useReducer, useContext} from 'react'
 import * as Reducer from '../store/hooks/hooks_reducer'
 import * as ACTIONS from '../store/actions/actions'
+import Context from '../utils/context';
 
 const HooksContainer1 = props => {
+
+    const context = useContext(Context);
     const [stateValue, setValue] = useState(0);
     const [useEffectValue, setUseEffectValue] = useState(null);
     const [state, dispatch] = useReducer(Reducer.HooksReducer, Reducer.initialState)
@@ -37,12 +40,19 @@ const HooksContainer1 = props => {
     <div>
     Hooks
 
+    <p>useDispatch</p>
     <button onClick={handleDispatchTrue}>Dispatch True</button>
     <button onClick={handleDispatchFalse}>Dispatch False</button>
+    <p>Local State with useState</p>
     <button onClick={increment}>{stateValue}+1</button>
     <button onClick={decrement}>{stateValue}-1</button>
+    <p>Global State with useContext</p>
+    <button onClick={context.incGlobalState}>{context.valueGlobalState}+1</button>
+    <button onClick={context.decGlobalState}>{context.valueGlobalState}-1</button>
+    <p>User handling of useEffect state</p>
     <button onClick={changeEffect}>change useEffect value</button>
     <div>
+        State of useEffect (useState(null))
         <p>
             {
                 useEffectValue
@@ -50,6 +60,9 @@ const HooksContainer1 = props => {
                 : <p>No Value</p>
             }
         </p>
+    </div>
+    <div>
+        State of useDispatch (useReducer().stateprop1)
         <p>
             StateProp1:
             {
