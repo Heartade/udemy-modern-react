@@ -49,6 +49,9 @@ const HooksContainer1 = props => {
     <p>Global State with useContext</p>
     <button onClick={context.incGlobalState}>{context.valueGlobalState}+1</button>
     <button onClick={context.decGlobalState}>{context.valueGlobalState}-1</button>
+    <p>Global useReducer with useContext</p>
+    <button onClick={context.dispatchContextTrue}>state {context.reducerGlobalState.toString()} to true</button>
+    <button onClick={context.dispatchContextFalse}>state {context.reducerGlobalState.toString()} to false</button>
     <p>User handling of useEffect state</p>
     <button onClick={changeEffect}>change useEffect value</button>
     <div>
