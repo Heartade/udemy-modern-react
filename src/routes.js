@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Container1 from './containers/container1'
 import Header from './containers/header';
 import Profile from './containers/profile';
-import Form1 from './containers/form1';
+import Form1 from './hooks/hooks_form';
 import RenderList from './containers/renderlist';
 
 

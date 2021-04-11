@@ -75,6 +75,9 @@ const HooksContainer1 = props => {
             }
         </p>
     </div>
+    <div>
+        UseContextSubmit: {context.useContextSubmit}
+    </div>
     {console.log(props)}
     </div>
 )};
